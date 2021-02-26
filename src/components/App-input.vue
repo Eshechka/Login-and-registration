@@ -40,7 +40,6 @@ export default {
 	width: 100%;
 
 	@media screen and (max-width: 480px) {
-		width: 90%;
 		margin-top: 0.2rem;
 	}
 }

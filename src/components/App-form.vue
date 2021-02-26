@@ -51,6 +51,9 @@ export default {
 	@media screen and (max-width: 768px) {
 		padding: 0 1rem;
 	}
+	@media screen and (max-width: 480px) {
+		padding: 0 3rem;
+	}
 
 	&__title {
 		font-weight: 300;
