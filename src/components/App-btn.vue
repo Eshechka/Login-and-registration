@@ -11,6 +11,7 @@
 
 export default {
 	name: 'App-btn',
+	
 	components: {  },
 	props: {
 		text: String,

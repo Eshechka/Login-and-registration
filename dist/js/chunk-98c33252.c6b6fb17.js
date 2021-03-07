@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-98c33252"],{"61eb":function(n,t,e){"use strict";e("aa1d")},"9e5f":function(n,t,e){"use strict";e.r(t);var a=function(){var n=this,t=n.$createElement,e=n._self._c||t;return e("div",{staticClass:"not-found"},[n._v("Страница не существует")])},c=[],s={name:"Page404",props:{},data:function(){return{}},methods:{}},u=s,o=(e("61eb"),e("2877")),i=Object(o["a"])(u,a,c,!1,null,"33f868cc",null);t["default"]=i.exports},aa1d:function(n,t,e){}}]);
+//# sourceMappingURL=chunk-98c33252.c6b6fb17.js.map

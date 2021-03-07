@@ -1,14 +1,21 @@
 <template>
-	<div class="home"
-	>
-		<h1>HOME</h1>
+	<div class="home">
+	<Appbtn
+		:text="`Logout`"
+		@btn-click="logoutUser"
+	></Appbtn>
+		<h1 class="home__title">HOME</h1>
 	</div>
 </template>
 
 <script>
+import Appbtn from './App-btn.vue'
 
 export default {
 	name: 'Home',
+	components: {
+		Appbtn
+	},
 	props: {
 		
 	},
@@ -19,8 +26,10 @@ export default {
 		}
 	},
 	methods: {
-
-
+		logoutUser() {
+			localStorage.setItem("isUserLogged", false);
+			this.$router.push('/auth');
+		},
 	},
 }
 </script>
@@ -29,7 +38,9 @@ export default {
 
 .home {
 
-
+	&__title { 
+		text-align: center;
+	}
 	@media screen and (max-width: 768px) {
 
 	}
