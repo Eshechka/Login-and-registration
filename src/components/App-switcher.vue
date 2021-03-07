@@ -1,20 +1,21 @@
 <template>
-  <div class="switcher"
-	:class="{
-		'switcher_right-active': isRightActive,
-	}"
-  >
-        <div class="switcher__element switcher__element_one">
+	<div class="switcher"
+		:class="{
+			'switcher_right-active': isRightActive,
+		}"
+	>
+		<div class="switcher__element switcher__element_one">
 			<Appform
 				:id="'Registration'"
 				:text="'Registration'"
+				@btn-click="registrationHandle"
 			>
 				<template v-slot:inputs>
 					<ValidationProvider rules="minmax:3,20" v-slot="{ errors }" tag="div">
 						<Appinput
 							:placehldr="`First name`"
-							:value="signup.firstname"
-							@input="(text) => signup.firstname = text">
+							:value="regUser.firstname"
+							@input="(text) => regUser.firstname = text">
 						</Appinput>
 						<div class="switcher__error-msg">{{ errors[0] }}</div>
 					</ValidationProvider>
@@ -22,8 +23,8 @@
 					<ValidationProvider rules="minmax:3,30" v-slot="{ errors }" tag="div">
 						<Appinput
 							:placehldr="`First name`"
-							:value="signup.lastname"
-							@input="(text) => signup.lastname = text">
+							:value="regUser.lastname"
+							@input="(text) => regUser.lastname = text">
 						</Appinput>
 						<div class="switcher__error-msg">{{ errors[0] }}</div>
 					</ValidationProvider>
@@ -31,8 +32,8 @@
 					<ValidationProvider rules="minmax:3,30" v-slot="{ errors }" tag="div">
 						<Appinput
 							:placehldr="`Login`"
-							:value="signup.login"
-							@input="(text) => signup.login = text">
+							:value="regUser.login"
+							@input="(text) => regUser.login = text">
 						</Appinput>
 						<div class="switcher__error-msg">{{ errors[0] }}</div>
 					</ValidationProvider>
@@ -40,9 +41,9 @@
 					<ValidationProvider rules="email" v-slot="{ errors }" tag="div">
 						<Appinput
 							:placehldr="`Email`"
-							:value="signup.email"
+							:value="regUser.email"
 							:type="`email`"
-							@input="(text) => signup.email = text">
+							@input="(text) => regUser.email = text">
 						</Appinput>
 						<div class="switcher__error-msg">{{ errors[0] }}</div>
 					</ValidationProvider>
@@ -50,9 +51,9 @@
 					<ValidationProvider rules="minmax:8,30" v-slot="{ errors }" tag="div">
 						<Appinput
 							:placehldr="`Password`"
-							:value="signup.password"
+							:value="regUser.password"
 							:type="`password`"
-							@input="(text) => signup.password = text">
+							@input="(text) => regUser.password = text">
 						</Appinput>
 						<div class="switcher__error-msg">{{ errors[0] }}</div>
 					</ValidationProvider>
@@ -60,38 +61,39 @@
 					<ValidationProvider rules="minmax:8,30" v-slot="{ errors }" tag="div">
 						<Appinput
 							:placehldr="`Password confirmation`"
-							:value="signup.password_confirmation"
+							:value="regUser.password_confirmation"
 							:type="`password`"
-							@input="(text) => signup.password_confirmation = text">
+							@input="(text) => regUser.password_confirmation = text">
 						</Appinput>
 						<div class="switcher__error-msg">{{ errors[0] }}</div>
 					</ValidationProvider>
 				</template>
 
 			</Appform>
-        </div>        
+		</div>        
 		
 		<div class="switcher__element switcher__element_two">
 			<Appform
 				:id="'Login'"
 				:text="'Login'"
+				@btn-click="loginHandle"
 			>
 				<template v-slot:inputs>
 					<ValidationProvider rules="email" v-slot="{ errors }" tag="div">
 						<Appinput
 							:placehldr="`Email`"
-							:value="signup.email"
+							:value="logUser.email"
 							:type="`email`"
-							@input="(text) => signup.email = text">
+							@input="(text) => logUser.email = text">
 						</Appinput>
 						<div class="switcher__error-msg">{{ errors[0] }}</div>
 					</ValidationProvider>
 					<ValidationProvider rules="minmax:8,30" v-slot="{ errors }" tag="div">
 						<Appinput
 							:placehldr="`Password`"
-							:value="signup.password"
+							:value="logUser.password"
 							:type="`password`"
-							@input="(text) => signup.password = text">
+							@input="(text) => logUser.password = text">
 						</Appinput>
 						<div class="switcher__error-msg">{{ errors[0] }}</div>
 					</ValidationProvider>
@@ -110,25 +112,25 @@
 				</template>
 
 			</Appform>
-        </div>
+		</div>
 
-        <div class="switcher__overlay-wrapper">
-            <div class="switcher__overlay">
-                <div class="switcher__overlay-panel switcher__overlay-panel_left">
+		<div class="switcher__overlay-wrapper">
+			<div class="switcher__overlay">
+				<div class="switcher__overlay-panel switcher__overlay-panel_left">
 					<Appbtn
 						:text="` To registration`"
 						@btn-click="rightActiveToggle"
 					></Appbtn>
-                </div>
-                <div class="switcher__overlay-panel switcher__overlay-panel_right">
-                    <Appbtn
+				</div>
+				<div class="switcher__overlay-panel switcher__overlay-panel_right">
+					<Appbtn
 						:text="`To login`"
 						@btn-click="rightActiveToggle"
 					></Appbtn>
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -156,7 +158,7 @@ extend('minmax', {
 })
 
 export default {
-	name: 'Switcher',
+	name: 'App-switcher',
 	components: { Appform, Appbtn, Appinput, ValidationProvider },
 	props: {
 		
@@ -164,13 +166,17 @@ export default {
 	data() {
 		return {
 			isRightActive: true,
-			signup: {
+			regUser: {
 				firstname: '',
 				lastname: '',
 				login: '',
 				email: '',
 				password: '',
 				password_confirmation: '',
+			},
+			logUser: {
+				email: '',
+				password: '',
 			},
 			rememberMe: true,
 		}
@@ -181,7 +187,21 @@ export default {
 		},
 		toggleClick() {
 			this.rememberMe = !this.rememberMe;
-		}
+		},
+		loginHandle() {
+			const user = localStorage.getItem("user");
+			if (user) {
+				const {email, password} = JSON.parse(user);
+				if (email===this.logUser.email && password===this.logUser.password) {
+					localStorage.setItem("isUserLogged", true);
+				}
+			}
+			
+			this.$router.push('/');
+		},
+		registrationHandle() {
+			localStorage.setItem("user", JSON.stringify(this.regUser));
+		},
 	},
 }
 </script>
@@ -203,10 +223,9 @@ export default {
 	@media screen and (max-width: 768px) {
 		max-width: unset;
 		width: 90%;
-	}
-	@media screen and (max-width: 480px) {
 		height: 600px;
 	}
+
 
 	&__element {
 		height: 100%;
@@ -226,6 +245,9 @@ export default {
 			z-index: 1;
 		}
 
+		@media screen and (max-width: 768px) {
+			height: 600px;
+		}
 		@media screen and (max-width: 480px) {
 			width: 100%;
 			top: 100px;
@@ -322,7 +344,7 @@ export default {
 
 	&__error-msg {
 		font-size: 12px;
-		color: rgb(255, 241, 241);
+		color: rgb(134, 61, 61);
 		margin-top: -5px;
 		min-height: 15px;
 	}

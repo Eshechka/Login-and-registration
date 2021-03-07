@@ -6,25 +6,9 @@
 </template>
 
 <script>
-// import Appform from './App-form.vue'
-// import Appbtn from './App-btn.vue'
-// import Appinput from './App-input.vue'
-
-// import { ValidationProvider } from 'vee-validate'
-
-// import { extend } from 'vee-validate'
-
-// extend('minmax', {
-// 	validate(value, args) {
-// 		return value.length > args.min && value.length < args.max;
-// 	},
-// 	params: ['min', 'max'],
-// 	message: 'Поле должно содержать от {min} до {max} символов'
-// })
 
 export default {
 	name: 'Home',
-	// components: { Appform, Appbtn, Appinput, ValidationProvider },
 	props: {
 		
 	},
@@ -44,7 +28,6 @@ export default {
 <style lang="postcss">
 
 .home {
-
 
 
 	@media screen and (max-width: 768px) {

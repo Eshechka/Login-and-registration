@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/auth',
     name: 'Authentification',
-    component: () => import('../components/Switcher.vue'),
+    component: () => import('../components/App-switcher.vue'),
     meta: {
       public: true,
     }
@@ -33,7 +33,7 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
     const isPublicRoute = to.matched.some(route => route.meta.public);
-    const isUserLogged = true;//потом это тянем из стора
+    const isUserLogged = !!localStorage.getItem("isUserLogged");//потом это потянем из стора
 
     if (!isPublicRoute) {
       if (isUserLogged) {
@@ -45,7 +45,8 @@ router.beforeEach(async (to, from, next) => {
         }
       }
       else {
-        //тут будет еботня с токеном
+        if (router.currentRoute.path !== '/auth') router.replace('/auth');
+        //тут будет токен
       }
     }
     else {

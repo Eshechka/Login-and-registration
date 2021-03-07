@@ -11,7 +11,7 @@
 			<Appbtn
 				:text="text"
 				:type="`submit`"
-				@btn-click="signInSubmit"
+				@btn-click="$emit('btn-click')"
 			></Appbtn>
 		</div>
 	</form>
@@ -28,20 +28,15 @@ export default {
 	text: String,
   },
   methods: {
-	signInSubmit() {
-		alert('signInSubmit');
-	},
   },
 }
 </script>
 
 <style lang="postcss" scoped>
-/* @import "../mixins.pcss"; */
 
 .form {
 	background-color: #e9e9e9;
 	display: flex;
-	/* align-items: center; */
 	justify-content: center;
 	flex-direction: column;
 	padding: 0 2rem;

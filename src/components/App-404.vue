@@ -23,7 +23,6 @@ export default {
 <style lang="postcss" scoped>
 
 .not-found {
-	background-color: #fff;
 	color: red;
 }
 </style>
