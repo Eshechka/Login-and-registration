@@ -1,16 +1,20 @@
 <template>
-	<form class="form" :id="id"
+	<form class="form" 
+		:id="id"
 		@submit.prevent="$emit('form-submit')"
 	>
-		<h2 class="form__title">{{text}}</h2>
+		<h2 class="form__title">{{textTitle}}</h2>
 		<slot name="inputs"></slot>
-		<div class="form__extra">
+		<div class="form__extra"
+			v-if="needExtra"
+		>
 			<slot name="extra"></slot>
 		</div>
 		<div class="form__btn">
 			<Appbtn
-				:text="text"
+				:textBtn="textBtn"
 				:type="`submit`"
+				:disabled=disabledBtn
 				@btn-click="$emit('btn-click')"
 			></Appbtn>
 		</div>
@@ -25,7 +29,10 @@ export default {
   components: { Appbtn },
   props: {
 	id: String,
-	text: String,
+	textBtn: String,
+	textTitle: String,
+	needExtra: Boolean,
+	disabledBtn: Boolean,
   },
   methods: {
   },
@@ -39,21 +46,27 @@ export default {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	padding: 0 2rem;
-	height: 100%;
+	padding: 1rem 2rem;
+	/* height: 100%; */
 	text-align: center;
 
 	@media screen and (max-width: 768px) {
-		padding: 0 1rem;
+		padding: 1rem 1.5rem;
 	}
 	@media screen and (max-width: 480px) {
-		padding: 0 3rem;
+		padding: 1rem;
 	}
 
 	&__title {
 		font-weight: 300;
 		margin: 0;
 		margin-bottom: 1.25rem;
+		margin-top: 1rem;
+
+		@media screen and (max-width: 480px) {
+			margin-top: 0.5rem;
+			margin-bottom: 0.5rem;
+		}
 	}
 	&__btn {
 		margin-top: 1.5rem;

@@ -33,7 +33,8 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
     const isPublicRoute = to.matched.some(route => route.meta.public);
-    const isUserLogged = !!localStorage.getItem("isUserLogged");//потом это потянем из стора
+    const isUserLogged = JSON.parse(localStorage.getItem("isUserLogged"));//потом это потянем из стора
+    console.log('isUserLogged = ',isUserLogged);
 
     if (!isPublicRoute) {
       if (isUserLogged) {

@@ -1,9 +1,9 @@
 <template>
 	<button class="btn"
-		type="type ? type : `text`"
+		:type="type ? type : `text`"
 		@click="$emit('btn-click')"
 	>
-		{{text}}
+		{{textBtn}}
 	</button>
 </template>
 
@@ -14,14 +14,13 @@ export default {
 	
 	components: {  },
 	props: {
-		text: String,
+		textBtn: String,
 		type: String,
 	}
 }
 </script>
 
 <style lang="postcss">
-/* @import "../mixins.pcss"; */
 
 .btn {
 	background-color: #0367a6;
@@ -46,11 +45,17 @@ export default {
 		max-width: 90%;
 	}
 
-	&:active {
+	&:active:not(:disabled) {
 		transform: scale(0.95);
 	}
-	&:focus {
+	&:focus:not(:disabled) {
 		outline: none;
+	}
+	&:disabled {
+		background-color: #eee;
+		border: 1px solid #ddd;
+		background-image: linear-gradient(90deg, #aaa 0%, #888 74%);
+		cursor: unset;
 	}
 }
 
